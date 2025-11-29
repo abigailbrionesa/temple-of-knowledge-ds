@@ -14,10 +14,11 @@ class Relic:
 
 class BSTNode:
     """Node of a Binary Search Tree."""
-    def __init__(self, e = None, left = None, right = None):
+    def __init__(self, key, value, left = None, right = None):
         self.left = left
         self.right = right
-        self.e = e
+        self.key = key
+        self.value = value
 
 class TempleArchive:
     """Binary Search Tree to store relics by ID."""
@@ -36,7 +37,7 @@ class TempleArchive:
             return
         #insert bst
     
-    def add_relic_help(self,node):
+    def add_relic_help(self,node,e):
         pass
     
     def search_relic(self,id):

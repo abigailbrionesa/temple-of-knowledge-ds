@@ -4,7 +4,10 @@
 
 class Relic:
     """Represents a relic in the Temple Archive."""
-    # TODO: complete the definition
+    def __init__(self,id,name,age):
+        self.id = id
+        self.name = name
+        self.age = age
 
 class BSTNode:
     """Node of a Binary Search Tree."""
@@ -15,7 +18,8 @@ class BSTNode:
 
 class TempleArchive:
     """Binary Search Tree to store relics by ID."""
-    # TODO: complete the definition
+    def __init__(self):
+        self.n = 0
 
 # Heap (Min-Heap)
 class ExcavationTask:

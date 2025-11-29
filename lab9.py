@@ -27,7 +27,19 @@ class BSTNode:
         if age < 0:
             return
         #insert bst
-        
+    
+    def add_relic_help(self,node):
+        pass
+    
+    def search_relic(self,id):
+        pass
+    
+    def remove_relic(self,id):
+        pass
+    
+    def list_relics(self):
+        pass
+
 
 class TempleArchive:
     """Binary Search Tree to store relics by ID."""

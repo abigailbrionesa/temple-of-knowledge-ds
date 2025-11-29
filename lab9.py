@@ -15,6 +15,19 @@ class BSTNode:
         self.left = left
         self.right = right
         self.e = e
+        self.ids = {}
+        self.root = None
+    
+    def add_relic(self,id,name,age):
+        #establish preconditions
+        if id in self.ids:
+            return
+        if not name:
+            return
+        if age < 0:
+            return
+        #insert bst
+        
 
 class TempleArchive:
     """Binary Search Tree to store relics by ID."""

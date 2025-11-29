@@ -54,6 +54,9 @@ class ExcavationTask:
     def __init__(self,task_name, priority):
         self.task_name = task_name
         self.priority = priority
+        
+    def __str__(self):
+        return f'{self.priority}: {self.task_name}'
 
 class ExcavationQueue:
     """Min-heap to manage excavation tasks by priority."""

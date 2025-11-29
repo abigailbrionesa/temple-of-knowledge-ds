@@ -43,6 +43,16 @@ class TempleArchive:
     def search_relic(self,id):
         pass
     
+    def _search_relic_help(self, node, key):
+        if node is None:
+            return None
+        if node.key < key:
+            return self._search_relic_help(self, node.left, key)
+        elif node.key > key:
+            return self._search_relic_help(self, node.right, key)
+        else:
+            return node.value
+    
     def remove_relic(self,id):
         pass
     

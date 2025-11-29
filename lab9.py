@@ -8,6 +8,9 @@ class Relic:
         self.id = id
         self.name = name
         self.age = age
+        
+    def __str__(self):
+        return f'{self.id}: {self.name} ({self.age} years old)'
 
 class BSTNode:
     """Node of a Binary Search Tree."""

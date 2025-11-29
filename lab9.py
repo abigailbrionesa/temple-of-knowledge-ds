@@ -18,9 +18,14 @@ class BSTNode:
         self.left = left
         self.right = right
         self.e = e
+
+class TempleArchive:
+    """Binary Search Tree to store relics by ID."""
+    def __init__(self):
+        self.n = 0
         self.ids = {}
         self.root = None
-    
+
     def add_relic(self,id,name,age):
         #establish preconditions
         if id in self.ids:
@@ -43,16 +48,12 @@ class BSTNode:
     def list_relics(self):
         pass
 
-
-class TempleArchive:
-    """Binary Search Tree to store relics by ID."""
-    def __init__(self):
-        self.n = 0
-
 # Heap (Min-Heap)
 class ExcavationTask:
     """Represents a task in the Excavation Queue."""
-    # TODO: complete the definition
+    def __init__(self,task_name, priority):
+        self.task_name = task_name
+        self.priority = priority
 
 class ExcavationQueue:
     """Min-heap to manage excavation tasks by priority."""

@@ -57,6 +57,19 @@ class ExcavationTask:
 
 class ExcavationQueue:
     """Min-heap to manage excavation tasks by priority."""
-    # TODO: complete the definition
+    def __init__(self):
+        self.count = 0
+    
+    def add_task(self,task_name,priority):
+        pass
+    
+    def get_next_task():
+        pass
+    
+    def complete_task():
+        pass
+    
+    def list_tasks():
+        pass
 
 # main code here

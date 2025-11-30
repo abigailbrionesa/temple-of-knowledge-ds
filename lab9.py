@@ -115,20 +115,18 @@ class ExcavationTask:
 class ExcavationQueue:
     """Min-heap to manage excavation tasks by priority."""
     def __init__(self, max_size = 100):
-        self.Heap = [0] * max_size
+        self.Heap = [None] * max_size
         self.size = max_size
         self.n = 0
     
     def add_task(self,task_name,priority):
         assert self.n < self.size
-        new_task = ExcavationTask(task_name,priority)
         current = self.n
-        self.Heap[current] = new_task
-        
-        while (current > 0) and (self.Heap[current] > self.Heap[self._parent(current)]):
-            self.Heap[current], self.Heap[self._parent(current)] = self.Heap[self._parent(current)], self.Heap[current]
-            current = self._parent(current)
-        return
+        self.Heap[current] = ExcavationTask(task_name,priority)
+        while (current > 0) and (self.Heap[current].priority < self.Heap[self._parent(current)].priority):
+            parent = self._parent(current)
+            self.Heap[current], self.Heap[parent] = self.Heap[parent], self.Heap[current]
+            current = parent
 
     def _left_child(self,pos):
         assert pos <= (self.n//2) - 1 #is internal node
@@ -145,9 +143,29 @@ class ExcavationQueue:
     def get_next_task(self):
         return self.Heap[0]
     
-    def complete_task():
-        pass
+    def complete_task(self):
+        assert self.n > 1
+        #remove root
+        root = self.Heap[0]
+        self.Heap[0] = self.Heap[self.n - 1]
+        self.n -= 1
+        self._sift_down(0)
+        return root
     
+    def _sift_down(self,index):
+        assert 0 <= index < self.n
+        while not self.is_leaf(index):
+            j = self._left_child(index)
+            if j < self.n-1 and self.Heap[j] > self.Heap[j+1]:
+                j += 1
+            if self.Heap[index] <= self.Heap[j]:
+                return
+            self.Heap[index], self.Heap[j] = self.Heap[j], self.Heap[index]
+            index = j            
+        
+    def is_leaf(self,index):
+        return (index >= self.n//2)
+        
     def list_tasks():
         pass
 

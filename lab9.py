@@ -126,7 +126,8 @@ class ExcavationQueue:
         self.Heap[current] = new_task
         
         while (current > 0) and (self.Heap[current] > self.Heap[self._parent(current)]):
-            pass
+            self.Heap[current], self.Heap[self._parent(current)] = self.Heap[self._parent(current)], self.Heap[current]
+            current = self._parent(current)
         return
 
     def _left_child(self,pos):

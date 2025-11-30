@@ -166,7 +166,10 @@ class ExcavationQueue:
     def is_leaf(self,index):
         return (index >= self.n//2)
         
-    def list_tasks():
-        pass
+    def list_tasks(self):
+        queue_copy = self.Heap.copy()
+        while queue_copy is not None:
+            print(queue_copy.remove_min())
+        return
 
 # main code here

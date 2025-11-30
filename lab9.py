@@ -1,5 +1,6 @@
 # CSC 171 - Lab 9: The Temple of Forgotten Knowledge
 # Abigail Briones Aranda
+
 # Binary Search Tree (BST)
 
 class Relic:
@@ -33,7 +34,7 @@ class TempleArchive:
             return
         if age < 0:
             return
-        self.root = self._add_relic_help(self,id,(name,age))
+        self.root = self._add_relic_help(BSTNode(id,Relic(id,name,age)))
         self.n_relics += 1
         return
     
@@ -98,10 +99,10 @@ class TempleArchive:
             return
         self._inorder_traversal(node.left)
         print(node.value)
-        self._inorder_traversal(node.right)
-        
+        self._inorder_traversal(node.right)        
 
 # Heap (Min-Heap)
+
 class ExcavationTask:
     """Represents a task in the Excavation Queue."""
     def __init__(self,task_name, priority):
@@ -113,12 +114,28 @@ class ExcavationTask:
 
 class ExcavationQueue:
     """Min-heap to manage excavation tasks by priority."""
-    def __init__(self):
-        self.count = 0
+    def __init__(self, max_size = 100):
+        self.Heap = [0] * max_size
+        self.size = max_size
+        self.n = 0
     
     def add_task(self,task_name,priority):
+        assert self.n < self.size
+        new_task = ExcavationTask(task_name,priority)
+        current = self.n
+        self.Heap[current] = new_task
+        
+        while (current > 0) and (self.Heap[current] > self.Heap[self._parent(current)]):
+            pass
+        return
+
+    def _parent(self,pos):
+        assert pos > 0
+        return (pos-1)//2
+        
+    def _add_task_help(self,):
         pass
-    
+        
     def get_next_task():
         pass
     

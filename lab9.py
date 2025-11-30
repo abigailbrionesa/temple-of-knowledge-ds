@@ -119,31 +119,33 @@ class ExcavationQueue:
         assert self.n < self.size
         current = self.n
         self.Heap[current] = ExcavationTask(task_name,priority)
+        self.n += 1
         while (current > 0) and (self.Heap[current].priority < self.Heap[self._parent(current)].priority):
             parent = self._parent(current)
             self.Heap[current], self.Heap[parent] = self.Heap[parent], self.Heap[current]
             current = parent
 
     def _left_child(self,pos):
-        assert pos <= (self.n//2) - 1 #is internal node
-        return (2 * pos) + 1
+        assert pos<=(self.n//2)-1 #is internal node
+        return (2*pos)+1
     
     def _right_child(self,pos):
-        assert pos <= (self.n//2) - 1 #is internal node
-        return (2 * pos) + 2
+        assert pos<=(self.n//2)-1 #is internal node
+        return (2*pos)+2
         
     def _parent(self,pos):
-        assert pos > 0 #is not root
+        assert pos>0 #is not root
         return (pos-1)//2
         
     def get_next_task(self):
+        assert self.n > 0, 'Error: queue is empty'
         return self.Heap[0]
     
     def complete_task(self):
-        assert self.n > 1
+        assert self.n > 0
         #remove root
         root = self.Heap[0]
-        self.Heap[0] = self.Heap[self.n - 1]
+        self.Heap[0] = self.Heap[self.n-1]
         self.n -= 1
         self._sift_down(0)
         return root
@@ -152,15 +154,15 @@ class ExcavationQueue:
         assert 0 <= index < self.n
         while not self.is_leaf(index):
             j = self._left_child(index)
-            if j < self.n-1 and self.Heap[j] > self.Heap[j+1]:
+            if j < self.n-1 and self.Heap[j].priority > self.Heap[j+1].priority:
                 j += 1
-            if self.Heap[index] <= self.Heap[j]:
+            if self.Heap[index].priority <= self.Heap[j].priority:
                 return
             self.Heap[index], self.Heap[j] = self.Heap[j], self.Heap[index]
             index = j            
         
     def is_leaf(self,index):
-        return (index >= self.n//2)
+        return index>=self.n//2
         
     def list_tasks(self):
         queue_copy = self.Heap.copy()

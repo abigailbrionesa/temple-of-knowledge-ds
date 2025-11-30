@@ -28,9 +28,7 @@ class TempleArchive:
         self.n_relics = 0
 
     def add_relic(self,id,name,age):
-        '''
-        insert a relic into the BST
-        '''
+        '''Insert a relic into the BST.'''
         if self.search_relic(id):
             raise AssertionError('Error: id is already stored')
         assert name is not None, 'Error: name must be a non-empty string'
@@ -49,6 +47,7 @@ class TempleArchive:
         return node
 
     def search_relic(self,id):
+        '''Returns the relic with the given id or None'''
         return self._search_relic_help(self.root, id)
         
     def _search_relic_help(self, node, key):
@@ -62,6 +61,7 @@ class TempleArchive:
             return node.value
     
     def remove_relic(self,id):
+        '''Removes the relic with the given id if it exists'''
         if self.search_relic(id) is None:
             raise AssertionError(f'Error: relic with id {id} does not exist')
         self.root = self._remove_relic_help(self.root, id)
@@ -96,6 +96,7 @@ class TempleArchive:
         return node
     
     def list_relics(self):
+        '''Prints all relics in ascending order of ids'''
         self._inorder_traversal(self.root)
     
     def _inorder_traversal(self,node):
@@ -123,6 +124,7 @@ class ExcavationQueue:
         self.n = 0
     
     def add_task(self,task_name,priority):
+        '''The task is inserted into the heap'''
         assert self.n < self.size
         assert isinstance(task_name,str) and task_name != '', 'Error: task must be a non-empty string'
         assert priority > 0, 'Error: priority must be a positive integer'
@@ -151,6 +153,7 @@ class ExcavationQueue:
         return self.Heap[0]
     
     def complete_task(self):
+        '''The heap contains one or more tasks'''
         assert self.n > 0
         removed = self.Heap[0]
         self.Heap[0] = self.Heap[self.n-1]
@@ -175,6 +178,7 @@ class ExcavationQueue:
         return index>=self.n//2
         
     def list_tasks(self):
+        '''Prints all tasks ordered by priority (ascending)'''
         queue_copy = ExcavationQueue(self.size)
         for i in range(self.n):
             queue_copy.Heap[i] = self.Heap[i]

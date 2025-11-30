@@ -15,7 +15,7 @@ class Relic:
 
 class BSTNode:
     """Node of a Binary Search Tree."""
-    def __init__(self, key, value, left = None, right = None):
+    def __init__(self, key, value, left=None, right=None):
         self.left = left
         self.right = right
         self.key = key
@@ -24,45 +24,41 @@ class BSTNode:
 class TempleArchive:
     """Binary Search Tree to store relics by ID."""
     def __init__(self):
-        self.n_relics = 0
         self.root = None
+        self.n_relics = 0
 
     def add_relic(self,id,name,age):
-        if self.search_relic(id) is not None:
-            return
-        if not name:
-            return
-        if age < 0:
-            return
+        assert self.search_relic(id) is not None, 'Error: id is already stored'
+        assert name is not None, 'Error: name must be a non-empty string'
+        assert age > 0, 'Error: age must be a positive integer'
         self.root = self._add_relic_help(BSTNode(id,Relic(id,name,age)))
         self.n_relics += 1
-        return
     
     def _add_relic_help(self,node,key,value):
         if node is None:
-            return BSTNode(id,value)
+            return BSTNode(key,value)
         if node.key > key:
-            self.left = self._add_relic_help(self,node,key,value)
+            node.left = self._add_relic_help(self,node.left,key,value)
         elif node.key < key:
-            self.right = self._add_relic_help(self,node,key,value)
-    
+            node.right = self._add_relic_help(self,node.right,key,value)
+        return node
+
     def search_relic(self,id):
         return self._search_relic_help(self.root, id)
         
     def _search_relic_help(self, node, key):
         if node is None:
-            return None
-        if node.key < key:
+            return
+        if node.key > key:
             return self._search_relic_help(self, node.left, key)
-        elif node.key > key:
+        elif node.key < key:
             return self._search_relic_help(self, node.right, key)
         else:
             return node.value
     
     def remove_relic(self,id):
         self.root = self._remove_relic_help(self.root, id)
-        self.size -= 1
-        return
+        self.n_relics -= 1
     
     def _remove_relic_help(self, node, key):
         if node is None:
@@ -77,8 +73,9 @@ class TempleArchive:
             if node.right is None:
                 return node.left
             succesor = self._find_min(node.right)
-            node.key, node.val = succesor.key, succesor.val
+            node.key, node.value = succesor.key, succesor.value
             node.right = self._delete_min(node.right)
+        return node
 
     def _find_min(self,node):
         while node.left is not None:
@@ -95,11 +92,10 @@ class TempleArchive:
         self._inorder_traversal(self.root)
     
     def _inorder_traversal(self,node):
-        if node is None:
-            return
-        self._inorder_traversal(node.left)
-        print(node.value)
-        self._inorder_traversal(node.right)        
+        if node:
+            self._inorder_traversal(node.left)
+            print(node.value)
+            self._inorder_traversal(node.right)        
 
 # Heap (Min-Heap)
 
@@ -171,5 +167,3 @@ class ExcavationQueue:
         while queue_copy is not None:
             print(queue_copy.remove_min())
         return
-
-# main code here

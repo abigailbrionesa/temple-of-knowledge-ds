@@ -129,8 +129,16 @@ class ExcavationQueue:
             pass
         return
 
+    def _left_child(self,pos):
+        assert pos <= (self.n//2) - 1 #is internal node
+        return (2 * pos) + 1
+    
+    def _right_child(self,pos):
+        assert pos <= (self.n//2) - 1 #is internal node
+        return (2 * pos) + 2
+        
     def _parent(self,pos):
-        assert pos > 0
+        assert pos > 0 #is not root
         return (pos-1)//2
         
     def _add_task_help(self,):

@@ -185,3 +185,28 @@ class ExcavationQueue:
         queue_copy.n = self.n
         while queue_copy.n>0:
             print(queue_copy.complete_task())
+            
+def main():
+    archive = TempleArchive()
+    archive.add_relic(301,"Golden Idol",2000)
+    archive.add_relic(305,"Crystal Skull",1500)
+    archive.add_relic(302,"Ancient Tablet",2500)
+    archive.list_relics()
+    archive.remove_relic(302)
+    assert archive.search_relic(302) is None
+    assert archive.search_relic(301).name == "Golden Idol"
+    assert archive.search_relic(200) is None
+    assert archive.search_relic(305).age == 1500
+    queue = ExcavationQueue()
+    queue.add_task("Stabilize collapsing chamber",1)
+    queue.add_task("Retrieve Golden Idol",2)
+    queue.add_task("Translate Ancient Table",3)
+    print(queue.get_next_task())
+    assert queue.get_next_task().priority == 1
+    queue.complete_task()
+    assert queue.get_next_task().priority == 2
+    print(queue.get_next_task())
+    queue.complete_task()
+
+if __name__ == "__main__":
+    main()

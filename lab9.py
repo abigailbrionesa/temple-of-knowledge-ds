@@ -78,10 +78,28 @@ class TempleArchive:
             succesor = self._find_min(node.right)
             node.key, node.val = succesor.key, succesor.val
             node.right = self._delete_min(node.right)
-            
 
+    def _find_min(self,node):
+        while node.left is not None:
+            node = node.left
+        return node
+    
+    def _delete_min(self,node):
+        if node.left is None:
+            return node.right
+        node.left = self._delete_min(node.left)
+        return node
+    
     def list_relics(self):
-        pass
+        self._inorder_traversal(self.root)
+    
+    def _inorder_traversal(self,node):
+        if node is None:
+            return
+        self._inorder_traversal(node.left)
+        print(node.value)
+        self._inorder_traversal(node.right)
+        
 
 # Heap (Min-Heap)
 class ExcavationTask:

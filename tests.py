@@ -13,14 +13,14 @@ assert archive.search_relic(500).name == "Relic 2"
 assert archive.search_relic(110).age == 500
 assert archive.search_relic(43) is None
 
-archive.remove_relic(110) # remove leaf
+archive.remove_relic(110) #remove relic
 assert archive.search_relic(110) is None
 
-# adding relics
-archive.add_relic(75,"Relic 4",100)
-archive.add_relic(125,"Relic 5",900)
+#adding relic
+archive.add_relic(75,"Relic 4",150)
+archive.add_relic(125,"Relic 5",950)
 
-# remove node with one child
+#remove node with one child
 archive.remove_relic(125)
 assert archive.search_relic(125) is None
 
@@ -35,22 +35,22 @@ print("\nlist_relics:")
 archive.list_relics()
 
 # EXCAVATION QUEUE
-q = ExcavationQueue()
-q.add_task("Task a",3)
-q.add_task("Task b",1)
-q.add_task("Task c",2)
-q.add_task("Task d",3)
-q.add_task("Task e",2)
+queue = ExcavationQueue()
+queue.add_task("stabilize ancient pillar",3)
+queue.add_task("decode mystic tablet",1)
+queue.add_task("secure hidden chamber",2)
+queue.add_task("collect rare crystals",3)
+queue.add_task("map subterranean tunnels",2)
 
-assert q.get_next_task().priority == 1 #peak
+assert queue.get_next_task().priority == 1
 
-q.complete_task() #complete task
-assert q.get_next_task().priority == 2
+queue.complete_task()
+assert queue.get_next_task().priority == 2
 
-q.complete_task()
-assert q.get_next_task().priority == 2
+queue.complete_task()
+assert queue.get_next_task().priority == 2
 
-# empty queue
+#empty queue
 try:
     empty = ExcavationQueue()
     empty.get_next_task()
@@ -65,6 +65,5 @@ try:
 except AssertionError:
     pass
 
-
 print("\nlist_tasks:")
-q.list_tasks()
+queue.list_tasks()

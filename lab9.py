@@ -142,11 +142,8 @@ class ExcavationQueue:
         assert pos > 0 #is not root
         return (pos-1)//2
         
-    def _add_task_help(self,):
-        pass
-        
-    def get_next_task():
-        pass
+    def get_next_task(self):
+        return self.Heap[0]
     
     def complete_task():
         pass

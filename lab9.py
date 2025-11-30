@@ -28,19 +28,21 @@ class TempleArchive:
         self.n_relics = 0
 
     def add_relic(self,id,name,age):
-        assert self.search_relic(id) is not None, 'Error: id is already stored'
+        if self.search_relic(id):
+            raise AssertionError('Error: id is already stored')
         assert name is not None, 'Error: name must be a non-empty string'
         assert age > 0, 'Error: age must be a positive integer'
-        self.root = self._add_relic_help(BSTNode(id,Relic(id,name,age)))
+        relic_value = Relic(id,name,age)
+        self.root = self._add_relic_help(self.root,id,relic_value)
         self.n_relics += 1
     
     def _add_relic_help(self,node,key,value):
         if node is None:
             return BSTNode(key,value)
         if node.key > key:
-            node.left = self._add_relic_help(self,node.left,key,value)
+            node.left = self._add_relic_help(node.left,key,value)
         elif node.key < key:
-            node.right = self._add_relic_help(self,node.right,key,value)
+            node.right = self._add_relic_help(node.right,key,value)
         return node
 
     def search_relic(self,id):
@@ -50,9 +52,9 @@ class TempleArchive:
         if node is None:
             return
         if node.key > key:
-            return self._search_relic_help(self, node.left, key)
+            return self._search_relic_help(node.left, key)
         elif node.key < key:
-            return self._search_relic_help(self, node.right, key)
+            return self._search_relic_help(node.right, key)
         else:
             return node.value
     
@@ -143,18 +145,19 @@ class ExcavationQueue:
     
     def complete_task(self):
         assert self.n > 0
-        #remove root
-        root = self.Heap[0]
+        removed = self.Heap[0]
         self.Heap[0] = self.Heap[self.n-1]
+        self.Heap[self.n-1] = None
         self.n -= 1
-        self._sift_down(0)
-        return root
+        if self.n > 0:
+            self._sift_down(0)
+        return removed
     
     def _sift_down(self,index):
         assert 0 <= index < self.n
         while not self.is_leaf(index):
             j = self._left_child(index)
-            if j < self.n-1 and self.Heap[j].priority > self.Heap[j+1].priority:
+            if j < self.n-1 and self.Heap[j].priority < self.Heap[j+1].priority:
                 j += 1
             if self.Heap[index].priority <= self.Heap[j].priority:
                 return

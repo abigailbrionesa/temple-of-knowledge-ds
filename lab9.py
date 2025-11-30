@@ -28,6 +28,9 @@ class TempleArchive:
         self.n_relics = 0
 
     def add_relic(self,id,name,age):
+        '''
+        insert a relic into the BST
+        '''
         if self.search_relic(id):
             raise AssertionError('Error: id is already stored')
         assert name is not None, 'Error: name must be a non-empty string'
@@ -50,7 +53,7 @@ class TempleArchive:
         
     def _search_relic_help(self, node, key):
         if node is None:
-            return
+            return None
         if node.key > key:
             return self._search_relic_help(node.left, key)
         elif node.key < key:
@@ -121,7 +124,7 @@ class ExcavationQueue:
     
     def add_task(self,task_name,priority):
         assert self.n < self.size
-        assert task_name != '', 'Error: task must be a non-empty string'
+        assert isinstance(task_name,str) and task_name != '', 'Error: task must be a non-empty string'
         assert priority > 0, 'Error: priority must be a positive integer'
         current = self.n
         self.Heap[current] = ExcavationTask(task_name,priority)
@@ -161,7 +164,7 @@ class ExcavationQueue:
         assert 0 <= index < self.n
         while not self.is_leaf(index):
             j = self._left_child(index)
-            if j < self.n-1 and self.Heap[j+1].priority < self.Heap[j].priority:
+            if j+1 < self.n and self.Heap[j+1].priority < self.Heap[j].priority:
                 j += 1
             if self.Heap[index].priority <= self.Heap[j].priority:
                 return

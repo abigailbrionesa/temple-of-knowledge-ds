@@ -121,6 +121,8 @@ class ExcavationQueue:
     
     def add_task(self,task_name,priority):
         assert self.n < self.size
+        assert task_name != '', 'Error: task must be a non-empty string'
+        assert priority > 0, 'Error: priority must be a positive integer'
         current = self.n
         self.Heap[current] = ExcavationTask(task_name,priority)
         self.n += 1

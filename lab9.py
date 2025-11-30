@@ -59,6 +59,8 @@ class TempleArchive:
             return node.value
     
     def remove_relic(self,id):
+        if self.search_relic(id) is None:
+            raise AssertionError(f'Error: relic with id {id} does not exist')
         self.root = self._remove_relic_help(self.root, id)
         self.n_relics -= 1
     
@@ -157,7 +159,7 @@ class ExcavationQueue:
         assert 0 <= index < self.n
         while not self.is_leaf(index):
             j = self._left_child(index)
-            if j < self.n-1 and self.Heap[j].priority < self.Heap[j+1].priority:
+            if j < self.n-1 and self.Heap[j+1].priority < self.Heap[j].priority:
                 j += 1
             if self.Heap[index].priority <= self.Heap[j].priority:
                 return
@@ -168,7 +170,9 @@ class ExcavationQueue:
         return index>=self.n//2
         
     def list_tasks(self):
-        queue_copy = self.Heap.copy()
-        while queue_copy is not None:
-            print(queue_copy.remove_min())
-        return
+        queue_copy = ExcavationQueue(self.size)
+        for i in range(self.n):
+            queue_copy.Heap[i] = self.Heap[i]
+        queue_copy.n = self.n
+        while queue_copy.n>0:
+            print(queue_copy.complete_task())

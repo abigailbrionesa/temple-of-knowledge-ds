@@ -23,26 +23,31 @@ class BSTNode:
 class TempleArchive:
     """Binary Search Tree to store relics by ID."""
     def __init__(self):
-        self.n = 0
-        self.ids = {}
+        self.n_relics = 0
         self.root = None
 
     def add_relic(self,id,name,age):
-        #establish preconditions
-        if id in self.ids:
+        if self.search_relic(id) is not None:
             return
         if not name:
             return
         if age < 0:
             return
-        #insert bst
+        self.root = self._add_relic_help(self,id,(name,age))
+        self.n_relics += 1
+        return
     
-    def add_relic_help(self,node,e):
-        pass
+    def _add_relic_help(self,node,key,value):
+        if node is None:
+            return BSTNode(id,value)
+        if node.key > key:
+            self.left = self._add_relic_help(self,node,key,value)
+        elif node.key < key:
+            self.right = self._add_relic_help(self,node,key,value)
     
     def search_relic(self,id):
-        pass
-    
+        return self._search_relic_help(self.root, id)
+        
     def _search_relic_help(self, node, key):
         if node is None:
             return None
@@ -54,8 +59,27 @@ class TempleArchive:
             return node.value
     
     def remove_relic(self,id):
-        pass
+        self.root = self._remove_relic_help(self.root, id)
+        self.size -= 1
+        return
     
+    def _remove_relic_help(self, node, key):
+        if node is None:
+            return None
+        if node.key > key:
+            node.left = self._remove_relic_help(node.left,key)
+        elif node.key < key:
+            node.right = self._remove_relic_help(node.right,key)
+        else:
+            if node.left is None:
+                return node.right
+            if node.right is None:
+                return node.left
+            succesor = self._find_min(node.right)
+            node.key, node.val = succesor.key, succesor.val
+            node.right = self._delete_min(node.right)
+            
+
     def list_relics(self):
         pass
 

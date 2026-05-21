@@ -3,44 +3,74 @@
 # Temple of Forgotten Knowledge
 
 <p>
-An adventure-themed **Python data structures project** that lets students manage relics and excavation tasks in a simulated temple environment.
-This lab implements a <strong>Binary Search Tree (BST)</strong> to catalog relics and a <strong>Min-Heap</strong> to prioritize tasks, integrating object-oriented programming and algorithmic thinking.
+Temple of Forgotten Knowledge is an adventure-themed Python data structures lab that models a relic archive and an excavation task queue. It demonstrates binary search trees, min-heaps, object-oriented design, and edge-case testing through a temple management story.
 </p>
-˚　　　　✦　　　.　　. 🏺　 ˚　.　　　　 　　.　　　　　　 ✦　　　.　　˚　📜　　　　. ✦ 　🗝　　　　. ✦
-　　.  　 　　　˚　　　　　*　　 　　✦　　　.　　.　　　✦　　˚ 　　　 　　˚　.　*　　. 　˚　　.
-
-## Mission Overview
 
 <p>
-**Temple Management System** to help Indiana Jones and Professor Paleontologos catalog relics and manage excavation tasks.
-The BST (Temple Archive) allows for quick searches and orderly storage of relics, while the min-heap (Excavation Queue) ensures that urgent tasks are completed first.
+Built with <strong>Python classes, assertions, a BST archive, and a min-heap priority queue</strong>.
 </p>
 
-## 𝙵𝚎𝚊𝚝𝚞𝚛𝚎𝚜
+<p>
+<img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
+</p>
+
+## Highlights
 
 <ul>
-  <li>
-    <strong>Temple Archive (BST)</strong><br>
-    Insert, search, remove, and list relics by unique ID, maintaining BST properties.
-  </li>
-  <li>
-    <strong>Excavation Queue (Min-Heap)</strong><br>
-    Add tasks with priorities, peek at the most urgent, complete tasks, and list all tasks sorted by priority.
-  </li>
-  <li>
-    <strong>Edge Case Handling</strong><br>
-    Operations handle empty structures, duplicate IDs, and tie-breaking in priorities gracefully using assertions.
-  </li>
-  <li>
-    <strong>Automated Testing</strong><br>
-    `tests.py` validates all operations with normal and edge cases for both BST and Heap.
-  </li>
+  <li>Implements <code>TempleArchive</code> with insert, search, remove, and ordered listing behavior.</li>
+  <li>Implements <code>ExcavationQueue</code> with priority insertion, peek, completion, and ordered task listing.</li>
+  <li>Includes <code>tests.py</code> to exercise normal and edge cases.</li>
+  <li>Shows how narrative framing can make abstract data structures easier to inspect.</li>
 </ul>
 
-## D𝚎𝚖𝚘
+## Tech Stack
+
+<table>
+  <tr><th>Layer</th><th>Tools</th></tr>
+  <tr><td>Core stack</td><td>Python, Binary Search Tree, Min-Heap, Object-Oriented Programming</td></tr>
+  <tr><td>Supporting tools</td><td>Assertions</td></tr>
+</table>
+
+## Quick Start
+
+<pre><code>python lab9.py
+python tests.py</code></pre>
+
+## Project Structure
+
+<pre>lab9.py - Relic, BST node, archive, task, queue, and demo code
+tests.py - Assertions and edge-case checks
+tests.txt - Assignment or expected-output notes</pre>
+
+## Validation
 
 <p>
-🔗 Run the project locally:<br>
-```bash
-python lab9.py       # Demonstrates BST and Heap operations
-python test.py       # Runs automated tests
+Run <code>python tests.py</code> from the repository root.
+</p>
+
+## Scope Notes
+
+<p>
+The project is a learning lab and stores data in memory only.
+</p>
+
+## Roadmap
+
+<ul>
+  <li>Add docstrings for public class methods.</li>
+  <li>Add pytest-style tests for clearer test reporting.</li>
+</ul>
+
+## License
+
+<p>
+No license file is currently included.
+</p>
+
+## Built By
+
+<p>
+Built by <strong>Abigail Briones Aranda</strong> as part of a growing AI/software engineering portfolio focused on readable systems, thoughtful interfaces, and reproducible project documentation.
+</p>
+
+</samp>
